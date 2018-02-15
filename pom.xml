@@ -3,12 +3,9 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>vis.spain</groupId>
-	<artifactId>job-parent</artifactId>
+	<artifactId>jobs-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-
-	<name>job-parent</name>
-	<url>http://maven.apache.org</url>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -35,7 +32,7 @@
 	</distributionManagement>
 
 	<modules>
-		<module>Code/job-service</module>
+		<module>Code/jobs-service</module>
 	</modules>
 
 	<dependencies>
@@ -211,6 +208,7 @@
 			<!--<version>1.3.2.RELEASE</version> -->
 		</dependency>
 
+
 	</dependencies>
 
 	<dependencyManagement>
@@ -299,9 +297,6 @@
 
 		<profile>
 			<id>develop</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<build>
 				<defaultGoal>install</defaultGoal>
 				<plugins>
@@ -329,4 +324,6 @@
 		</profile>
 
 	</profiles>
+
+
 </project>
