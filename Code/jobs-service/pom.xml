@@ -22,6 +22,19 @@
 		<cxf.version>3.1.6</cxf.version>
 	</properties>
 
+	<distributionManagement>
+	    <repository>
+	      <id>myvdfes-releases</id>
+	      <name>Releases</name>
+	      <url>https://nexus-ui.myvdf.aws.cps.vodafone.com/repository/myvdfes-releases/</url>
+	    </repository>
+	    <snapshotRepository>
+	      <id>myvdfes-snapshots</id>
+	      <name>Snapshot</name>
+	      <url>https://nexus-ui.myvdf.aws.cps.vodafone.com/repository/myvdfes-snapshots/</url>
+	    </snapshotRepository>
+	 </distributionManagement>
+	
 	<dependencies>
 		<dependency>
 			<groupId>cglib</groupId>
@@ -212,5 +225,56 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>myvdfes-snapshots</id>
+				<activation>
+					<activeByDefault>true</activeByDefault>
+				</activation>
+				<repositories>
+
+					<repository>
+						<id>myvdfes-snapshots</id>
+							<releases>
+								<enabled>true</enabled>
+							</releases>
+							<snapshots>
+								<enabled>true</enabled>
+							</snapshots>
+							<url>https://nexus-ui.myvdf.aws.cps.vodafone.com/repository/myvdfes-snapshots/</url>
+					</repository>
+
+				</repositories>
+		</profile>
+
+		<profile>
+			<id>develop</id>
+				<build>
+					<defaultGoal>install</defaultGoal>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-antrun-plugin</artifactId>
+							<version>1.1</version>
+						</plugin>
+						<plugin>
+							<artifactId>maven-surefire-plugin</artifactId>
+						</plugin>
+						<plugin>
+							<artifactId>maven-jar-plugin</artifactId>
+							<executions>
+								<execution>
+									<phase>package</phase>
+									<goals>
+										<goal>jar</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</build>
+			</profile>
+		</profiles>
 
 </project>
