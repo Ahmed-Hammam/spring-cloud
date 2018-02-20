@@ -25,11 +25,17 @@
 
 
 	<distributionManagement>
-		<snapshotRepository>
-			<id>vsse-snapshots</id>
-			<url>https://nexus-ui.tools.aws.cps.vodafone.com/repository/vsse-snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>
+	    <repository>
+	      <id>myvdfes-releases</id>
+	      <name>Releases</name>
+	      <url>https://nexus-ui.myvdf.aws.cps.vodafone.com/repository/myvdfes-releases/</url>
+	    </repository>
+	    <snapshotRepository>
+	      <id>myvdfes-snapshots</id>
+	      <name>Snapshot</name>
+	      <url>https://nexus-ui.myvdf.aws.cps.vodafone.com/repository/myvdfes-snapshots/</url>
+	    </snapshotRepository>
+	 </distributionManagement>
 
 	<modules>
 		<module>Code/jobs-service</module>
@@ -129,11 +135,11 @@
 
 		<!-- Start Added dependecies from core team -->
 
-		<!--dependency> <groupId>com.vis.authentication</groupId> <artifactId>authentication</artifactId> 
+		<!--dependency> <groupId>com.vis.authentication</groupId> <artifactId>authentication</artifactId>
 			<version>0.0.1-SNAPSHOT</version> </dependency> -->
 
 
-		<!-- <dependency> <groupId>com.vis</groupId> <artifactId>common</artifactId> 
+		<!-- <dependency> <groupId>com.vis</groupId> <artifactId>common</artifactId>
 			<version>0.0.1-SNAPSHOT</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/javax.ws.rs/javax.ws.rs-api -->
@@ -274,56 +280,56 @@
 
 
 	<profiles>
-		<profile>
-			<id>vsse-snapshots</id>
-			<activation>
-				<activeByDefault>false</activeByDefault>
-			</activation>
-			<repositories>
+				<profile>
+					<id>myvdfes-snapshots</id>
+					<activation>
+						<activeByDefault>true</activeByDefault>
+					</activation>
+					<repositories>
 
-				<repository>
-					<id>vsse-snapshots</id>
-					<releases>
-						<enabled>true</enabled>
-					</releases>
-					<snapshots>
-						<enabled>true</enabled>
-					</snapshots>
-					<url>https://nexus-ui.tools.aws.cps.vodafone.com/repository/vsse-snapshots/</url>
-				</repository>
+						<repository>
+							<id>myvdfes-snapshots</id>
+							<releases>
+								<enabled>true</enabled>
+							</releases>
+							<snapshots>
+								<enabled>true</enabled>
+							</snapshots>
+							<url>https://nexus-ui.myvdf.aws.cps.vodafone.com/repository/myvdfes-snapshots/</url>
+						</repository>
 
-			</repositories>
-		</profile>
+					</repositories>
+				</profile>
 
-		<profile>
-			<id>develop</id>
-			<build>
-				<defaultGoal>install</defaultGoal>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.1</version>
-					</plugin>
-					<plugin>
-						<artifactId>maven-surefire-plugin</artifactId>
-					</plugin>
-					<plugin>
-						<artifactId>maven-jar-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
+			<profile>
+				<id>develop</id>
+				<build>
+					<defaultGoal>install</defaultGoal>
+					<plugins>
+						<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-antrun-plugin</artifactId>
+							<version>1.1</version>
+						</plugin>
+						<plugin>
+							<artifactId>maven-surefire-plugin</artifactId>
+						</plugin>
+						<plugin>
+							<artifactId>maven-jar-plugin</artifactId>
+							<executions>
+								<execution>
+									<phase>package</phase>
+									<goals>
+										<goal>jar</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</build>
+			</profile>
 
-	</profiles>
+		</profiles>
 
 
 </project>

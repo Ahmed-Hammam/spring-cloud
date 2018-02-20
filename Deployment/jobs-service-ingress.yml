@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  labels:
+    app: es-jobs-service
+    env: test
+  name: es-jobs-service
+  namespace: test
+spec:
+  tls:
+  - hosts:
+    - jobservice-es-test-mig.myvdf.aws.cps.vodafone.com
+    secretName: myvdf-certificate
+  rules:
+  - host: jobservice-es-test-mig.myvdf.aws.cps.vodafone.com
+    http:
+      paths:
+      - backend:
+          serviceName: es-jobs-service
+          servicePort: 8181
+        path: /

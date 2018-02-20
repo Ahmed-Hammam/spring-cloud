@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: es-jobs-service
+    env: test
+    country: es
+  name: es-jobs-service
+  namespace: test
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 33%
+      maxSurge: 100%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: es-jobs-service
+        env: test
+    spec:
+      containers:
+      - name: es-jobs-service-application
+        image: nexus-registry.myvdf.aws.cps.vodafone.com/jobs-service:v.VERSION
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8181
+          name: http
+      imagePullSecrets:
+      - name: myvdf-regsecret

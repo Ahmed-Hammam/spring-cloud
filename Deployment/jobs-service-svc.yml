@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: es-jobs-service
+    env: test
+    country: es
+  name: es-jobs-service
+  namespace: test
+spec:
+  selector:
+    app: es-jobs-service
+    env: test
+  ports:
+  - name: http
+    port: 8181
+    targetPort: 8181
