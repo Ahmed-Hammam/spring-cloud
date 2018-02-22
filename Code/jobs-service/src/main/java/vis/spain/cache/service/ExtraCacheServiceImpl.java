@@ -43,7 +43,6 @@ public class ExtraCacheServiceImpl implements CacheService {
 	private static final long ONE_HOUR = 60 * 60 * 1000L;
 
 	@Scheduled(fixedDelay = ONE_HOUR)
-	@PostConstruct
 	public void init() {
 		try {
 			updateCache();
@@ -58,7 +57,7 @@ public class ExtraCacheServiceImpl implements CacheService {
 			if (servicisList == null)
 				throw new GeneralSystemFailureException(GeneralSystemFailureExceptionEnum.UNXPECTED_ERROR_OCCURED);
 
-			BulkOperations bulkOperations = mongoTemplate.bulkOps(BulkMode.UNORDERED, ServiceDataFromRP.class);
+			BulkOperations bulkOperations = mongoTemplate.bulkOps(BulkMode.UNORDERED, ExtrasResponseDTO.class);
 			List<Pair<Query, Update>> catalogUpsert = new ArrayList<>();
 			List<String> codes = new ArrayList<>();
 			for (ExtrasResponseDTO catalog : servicisList) {
