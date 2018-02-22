@@ -26,17 +26,18 @@ import com.mongodb.DBObject;
 import lombok.extern.slf4j.Slf4j;
 import vis.spain.errorHandling.GeneralSystemFailureException;
 import vis.spain.errorHandling.GeneralSystemFailureException.GeneralSystemFailureExceptionEnum;
+import vis.spain.integration.servicesdata.dtos.ExtrasResponseDTO;
 import vis.spain.integration.servicesdata.dtos.ServiceDataFromRP;
 
 @Slf4j
 @Component
-@Qualifier("CacheServiceImpl")
-public class CacheServiceImpl implements CacheService {
+@Qualifier("ExtraCacheServiceImpl")
+public class ExtraCacheServiceImpl implements CacheService {
 
 	@Autowired
 	private RestTemplate restTemplate;
-	@Value("${serviceDataUrl:http://195.233.178.74:19200/api/servicios}")
-	private String catalogurl;
+	@Value("${extraDataUrl:http://195.233.178.74:19200/api/extras}")
+	private String extraCatalogurl;
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	private static final long ONE_HOUR = 60 * 60 * 1000L;
@@ -53,14 +54,14 @@ public class CacheServiceImpl implements CacheService {
 
 	public void updateCache() throws GeneralSystemFailureException {
 		try {
-			ServiceDataFromRP[] servicisList = restTemplate.getForObject(catalogurl, ServiceDataFromRP[].class);
+			ExtrasResponseDTO[] servicisList = restTemplate.getForObject(extraCatalogurl, ExtrasResponseDTO[].class);
 			if (servicisList == null)
 				throw new GeneralSystemFailureException(GeneralSystemFailureExceptionEnum.UNXPECTED_ERROR_OCCURED);
 
 			BulkOperations bulkOperations = mongoTemplate.bulkOps(BulkMode.UNORDERED, ServiceDataFromRP.class);
 			List<Pair<Query, Update>> catalogUpsert = new ArrayList<>();
 			List<String> codes = new ArrayList<>();
-			for (ServiceDataFromRP catalog : servicisList) {
+			for (ExtrasResponseDTO catalog : servicisList) {
 				DBObject dbObject = new BasicDBObject();
 				mongoTemplate.getConverter().write(catalog, dbObject);
 				Pair<Query, Update> pair = Pair.<Query, Update>of(
