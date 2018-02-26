@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.BulkOperations;
 import org.springframework.data.mongodb.core.BulkOperations.BulkMode;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -17,7 +16,6 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.data.util.Pair;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.BulkWriteResult;
@@ -26,6 +24,7 @@ import com.mongodb.DBObject;
 import lombok.extern.slf4j.Slf4j;
 import vis.spain.errorHandling.GeneralSystemFailureException;
 import vis.spain.errorHandling.GeneralSystemFailureException.GeneralSystemFailureExceptionEnum;
+import vis.spain.integration.servicesdata.dao.CatalogDao;
 import vis.spain.integration.servicesdata.dtos.ServiceDataFromRP;
 
 @Slf4j
@@ -34,9 +33,7 @@ import vis.spain.integration.servicesdata.dtos.ServiceDataFromRP;
 public class CacheServiceImpl implements CacheService {
 
 	@Autowired
-	private RestTemplate restTemplate;
-	@Value("${serviceDataUrl:http://195.233.178.74:19200/api/servicios}")
-	private String catalogurl;
+	private CatalogDao catalogDao;
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	private static final long ONE_HOUR = 60 * 60 * 1000L;
@@ -53,7 +50,7 @@ public class CacheServiceImpl implements CacheService {
 
 	public void updateCache() throws GeneralSystemFailureException {
 		try {
-			ServiceDataFromRP[] servicisList = restTemplate.getForObject(catalogurl, ServiceDataFromRP[].class);
+			List<ServiceDataFromRP>  servicisList = catalogDao.getServicesData();// restTemplate.getForObject(catalogurl, ServiceDataFromRP[].class);
 			if (servicisList == null)
 				throw new GeneralSystemFailureException(GeneralSystemFailureExceptionEnum.UNXPECTED_ERROR_OCCURED);
 
