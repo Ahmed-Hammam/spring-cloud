@@ -39,7 +39,6 @@ public class CacheServiceImpl implements CacheService {
 	private static final long ONE_HOUR = 60 * 60 * 1000L;
 
 	@Scheduled(fixedDelay = ONE_HOUR)
-	@PostConstruct
 	public void init() {
 		try {
 			updateCache();
