@@ -17,5 +17,5 @@ spec:
       paths:
       - backend:
           serviceName: es-jobs-service
-          servicePort: 8181
+          servicePort: 8080
         path: /

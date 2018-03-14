@@ -25,7 +25,7 @@ spec:
         image: nexus-registry.myvdf.aws.cps.vodafone.com/jobs-service:v.VERSION
         imagePullPolicy: Always
         ports:
-        - containerPort: 8181
+        - containerPort: 8080
           name: http
       imagePullSecrets:
       - name: myvdf-regsecret
