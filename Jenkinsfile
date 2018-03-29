@@ -5,6 +5,9 @@ pipeline {
 	environment {
         	VERSION = VersionNumber([projectStartDate: '2017-08-01',versionNumberString: '${BUILDS_ALL_TIME}', versionPrefix: '']);
 		}
+	options {
+   		 buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+ 		 }
 
     stages {
 
