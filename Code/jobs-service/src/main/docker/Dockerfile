@@ -1,4 +1,5 @@
 FROM openjdk:8u111-jdk-alpine
+RUN apk add --no-cache  curl bash
 CMD ["/bin/sh"]
 EXPOSE 8080
 VOLUME /tmp
