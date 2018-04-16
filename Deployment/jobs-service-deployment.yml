@@ -27,12 +27,5 @@ spec:
         ports:
         - containerPort: 8080
           name: http
-        resources:
-          requests:
-           memory: "2Gi"
-           cpu: "100m"
-          limits:
-           memory: "2Gi"
-           cpu: "1"
       imagePullSecrets:
       - name: myvdf-regsecret
