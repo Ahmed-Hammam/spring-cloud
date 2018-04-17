@@ -90,6 +90,7 @@ pipeline {
 				sed -i s/VERSION/${VERSION}/ Deployment/jobs-service-deployment.yml
 				echo "sed -i s/VERSION/${VERSION}/ Deployment/jobs-service-deployment.yml"
 				"""
+				sh "kubectl delete -f ./Deployment/jobs-service-deployment.yml -n test"
 				sh " kubectl --namespace=test apply -f ./Deployment"
 				sh "sleep 2"
 				sh "kubectl get pods --namespace=test "
