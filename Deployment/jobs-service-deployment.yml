@@ -29,10 +29,10 @@ spec:
           name: http
         resources:
           requests:
-            memory: "300m"
+            memory: "300Mi"
             cpu: "100m"
           limits:
-            memory: "600m"
+            memory: "600Mi"
             cpu: "350m"            
       imagePullSecrets:
       - name: myvdf-regsecret
