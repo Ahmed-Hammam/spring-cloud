@@ -28,12 +28,12 @@
 	    <repository>
 	      <id>myvdfes-releases</id>
 	      <name>Releases</name>
-	      <url>https://nexus-ui.myvdf.aws.cps.vodafone.com/repository/myvdfes-releases/</url>
+	      <url>http://nexus-ci2-nexus:8081/repository/myvdfes-releases/</url>
 	    </repository>
 	    <snapshotRepository>
 	      <id>myvdfes-snapshots</id>
 	      <name>Snapshot</name>
-	      <url>https://nexus-ui.myvdf.aws.cps.vodafone.com/repository/myvdfes-snapshots/</url>
+	      <url>http://nexus-ci2-nexus:8081/repository/myvdfes-snapshots/</url>
 	    </snapshotRepository>
 	 </distributionManagement>
 
@@ -295,7 +295,7 @@
 							<snapshots>
 								<enabled>true</enabled>
 							</snapshots>
-							<url>https://nexus-ui.myvdf.aws.cps.vodafone.com/repository/myvdfes-snapshots/</url>
+							<url>http://nexus-ci2-nexus:8081/repository/myvdfes-snapshots/</url>
 						</repository>
 
 					</repositories>
