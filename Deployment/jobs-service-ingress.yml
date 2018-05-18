@@ -1,11 +1,11 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
- # annotations:
- #   nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "false"
- #   nginx.ingress.kubernetes.io/auth-tls-secret: es-myvdf-temp/pkiv01-es-myvdf-temp-rootca-cert
- #   nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
- #   nginx.ingress.kubernetes.io/auth-tls-verify-depth: "3"
+  annotations:
+    nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "false"
+    nginx.ingress.kubernetes.io/auth-tls-secret: test/pkiv01-es-test-rootca-cert
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+    nginx.ingress.kubernetes.io/auth-tls-verify-depth: "3"
   labels:
     app: es-jobs-service
     env: test
@@ -30,7 +30,7 @@ spec:
   tls:
   - hosts:
     - jobservice-es-test.myvdf-internal.aws.cps.vodafone.com
-    secretName: pkiv01-es-myvdf-temp-wildcard-cert
+    secretName: pkiv01-es-test-wildcard-cert
   - hosts:
     - jobservice-es-test.myvdf.aws.cps.vodafone.com
     secretName: myvdf-certificate	
