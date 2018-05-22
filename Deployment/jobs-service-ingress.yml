@@ -2,10 +2,10 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "false"
-    nginx.ingress.kubernetes.io/auth-tls-secret: test/pkiv01-es-test-rootca-cert
-    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
-    nginx.ingress.kubernetes.io/auth-tls-verify-depth: "3"
+    #nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "false"
+    #nginx.ingress.kubernetes.io/auth-tls-secret: test/pkiv01-es-test-rootca-cert
+    #nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+    #nginx.ingress.kubernetes.io/auth-tls-verify-depth: "3"
   labels:
     app: es-jobs-service
     env: test
